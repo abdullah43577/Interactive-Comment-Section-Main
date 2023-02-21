@@ -107,7 +107,7 @@ section {
   font-size: 15px;
   line-height: 22px;
   color: $grayishBlue;
-  font-weight: 400; // font-weight: 500;
+  font-weight: 400;
 }
 
 .reply--section {
@@ -156,7 +156,6 @@ section {
 
   > .border--left {
     width: 2px;
-    // flex-grow: 1;
     min-height: 100%;
     background-color: $lightGrayishBlue;
   }
@@ -236,4 +235,24 @@ section {
 
 .hidden {
   display: none;
+}
+
+@media (max-width: 690px) {
+  main {
+    max-width: 550px;
+  }
+
+  .replied {
+    max-width: 450px;
+  }
+}
+
+@media (max-width: 570px) {
+  main {
+    max-width: 480px;
+  }
+
+  .replied {
+    max-width: 380px;
+  }
 }
