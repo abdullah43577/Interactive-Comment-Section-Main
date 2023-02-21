@@ -9,7 +9,13 @@ class App {
   constructor() {
     this.main = document.querySelector("main");
 
-    this.main.addEventListener("click", this.domtraverse);
+    this.main.addEventListener("click", this.domTraversePlus);
+    this.main.addEventListener("click", this.domTraverseMinus);
+    this.main.addEventListener("click", this.domTraverseReplyBtn);
+    this.main.addEventListener("click", this.domTraverseDeleteEl);
+    this.main.addEventListener("click", this.domTraverseEdit);
+    this.main.addEventListener("click", this.domTraverseComment);
+    this.main.addEventListener("click", this.domTraverseReplyBox);
     this.renderDomEl();
   }
 
@@ -265,21 +271,45 @@ class App {
     this.main.insertAdjacentHTML("beforeend", html);
   }
 
-  domtraverse(e) {
+  domTraversePlus(e) {
     let plus = e.target.closest(".vote--container > :first-child");
-    let minus = e.target.closest(".vote--container > :nth-child(3)");
-    let replybtn = e.target.closest(".reply");
-    let deleteEl = e.target.closest(".delete");
-    let edit = e.target.closest(".edit");
-    let comment = e.target.closest("#section3 > textarea");
-    let replyBox = e.target.closest(".reply--section > textarea");
-
+    if (!plus) return;
     console.log(plus);
+  }
+
+  domTraverseMinus(e) {
+    let minus = e.target.closest(".vote--container > :nth-child(3)");
+    if (!minus) return;
     console.log(minus);
+  }
+
+  domTraverseReplyBtn(e) {
+    let replybtn = e.target.closest(".reply");
+    if (!replybtn) return;
     console.log(replybtn);
+  }
+
+  domTraverseDeleteEl(e) {
+    let deleteEl = e.target.closest(".delete");
+    if (!deleteEl) return;
     console.log(deleteEl);
+  }
+
+  domTraverseEdit(e) {
+    let edit = e.target.closest(".edit");
+    if (!edit) return;
     console.log(edit);
+  }
+
+  domTraverseComment(e) {
+    let comment = e.target.closest("#section3 > textarea");
+    if (!comment) return;
     console.log(comment);
+  }
+
+  domTraverseReplyBox(e) {
+    let replyBox = e.target.closest(".reply--section > textarea");
+    if (!replyBox) return;
     console.log(replyBox);
   }
 }
