@@ -2,6 +2,12 @@
 
 @import "config";
 
+%style-shared {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -11,8 +17,223 @@
 body {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %style-shared;
   font-family: "Rubik", sans-serif;
+  background-color: $lightGray;
+}
+
+main {
+  max-width: 700px;
+  margin-top: 20px;
+  position: relative;
+}
+
+section {
+  margin-top: 10px;
+}
+
+.container {
+  @extend %style-shared;
+  align-items: flex-start;
+  padding: 15px;
+  background-color: $white;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, 0.1);
+
+  > .vote--container {
+    @extend %style-shared;
+    flex-direction: column;
+    background-color: $lightGray;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+
+    > span {
+      padding: 3px 0;
+      color: $moderateBlue;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    > figure > img:hover {
+      fill: $moderateBlue;
+    }
+  }
+}
+
+.content--container {
+  margin-left: 20px;
+
+  > .details {
+    @extend %style-shared;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    > .image--section,
+    > .reply {
+      @extend %style-shared;
+    }
+
+    > .reply {
+      color: $moderateBlue;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    > .image--section > img {
+      width: 30px;
+    }
+
+    > .reply > :first-child {
+      margin-right: 5px;
+    }
+  }
+}
+
+.name {
+  padding: 0 10px;
+  font-weight: 700;
+  font-size: 14px;
+
+  ~ p {
+    font-size: 14px;
+  }
+}
+
+.content {
+  font-size: 15px;
+  line-height: 22px;
+  color: $grayishBlue;
+  font-weight: 400; // font-weight: 500;
+}
+
+.reply--section {
+  @extend %style-shared;
+  align-items: flex-start;
+  background-color: $white;
+  margin-top: 10px;
+  padding: 15px;
+
+  > figure > img {
+    width: 35px;
+  }
+
+  > textarea {
+    width: 100%;
+    margin: 0 15px;
+    height: 70px;
+    border-radius: 5px;
+    border-color: $moderateBlue;
+    outline: none;
+    padding: 10px 15px;
+    font-family: "Rubik", sans-serif;
+  }
+
+  > button {
+    background-color: $moderateBlue;
+    padding: 10px 20px;
+    color: $white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.replies--container {
+  @extend %style-shared;
+  margin-top: 10px;
+  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+
+  > .border--left {
+    width: 2px;
+    // flex-grow: 1;
+    min-height: 100%;
+    background-color: $lightGrayishBlue;
+  }
+
+  > .replies {
+    @extend %style-shared;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .deledit {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .delete {
+    color: $softRed;
+  }
+
+  .edit {
+    color: $moderateBlue;
+  }
+
+  .delete,
+  .edit {
+    @extend %style-shared;
+    cursor: pointer;
+    gap: 0.2rem;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.replied {
+  max-width: 600px;
+}
+
+.comment--section {
+  @extend %style-shared;
+  align-items: flex-start;
+  background-color: $white;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 5px;
+
+  > figure > img {
+    width: 35px;
+  }
+
+  > textarea {
+    width: 100%;
+    margin: 0 15px;
+    height: 70px;
+    border-radius: 5px;
+    border-color: $lightGray;
+    outline: none;
+    padding: 10px 15px;
+    font-family: "Rubik", sans-serif;
+  }
+
+  > button {
+    background-color: $moderateBlue;
+    padding: 10px 20px;
+    color: $white;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.hidden {
+  display: none;
 }
