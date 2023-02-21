@@ -11,11 +11,313 @@
       href="./images/favicon-32x32.png"
     />
     <link rel="stylesheet" href="css/styles.css" />
-    <script defer src="app/script.js" type="module"></script>
+    <!-- <script defer src="app/script.js" type="module"></script> -->
     <title>Frontend Mentor | Interactive comments section</title>
   </head>
   <body>
-    <main></main>
+    <main>
+      <section class="container">
+        <section class="comment--section">
+          <!-- vote container -->
+          <div class="replymobile">
+            <div class="vote--container">
+              <img src="./images/icon-plus.svg" alt="icon-plus" />
+              <span>12</span>
+              <img src="./images/icon-minus.svg" alt="icon-minus" />
+            </div>
+
+            <!-- mobile reply -->
+            <div class="reply mobile--reply">
+              <img src="./images/icon-reply.svg" alt="icon-reply" />
+              <span>reply</span>
+            </div>
+          </div>
+
+          <!-- content container -->
+          <div class="content-main">
+            <div class="details-tab">
+              <div class="userinfo--sect">
+                <img
+                  src="./images/avatars/image-amyrobson.png"
+                  alt="image-amyrobson"
+                />
+                <p class="name">amyrobson</p>
+                <p class="time">1 month ago</p>
+              </div>
+
+              <div class="reply desktop--reply">
+                <img src="./images/icon-reply.svg" alt="icon-reply" />
+                <span>reply</span>
+              </div>
+            </div>
+
+            <div class="content">
+              Impressive! Though it seems the drag feature could be improved.
+              But overall it looks incredible. You've nailed the design and the
+              responsiveness at various breakpoints works really well.
+            </div>
+          </div>
+        </section>
+
+        <!-- reply section -->
+        <section class="replyBoxSection hidden">
+          <div class="info">
+            <img
+              src="./images/avatars/image-amyrobson.png"
+              alt="image-amyrobson"
+            />
+            <button>reply</button>
+          </div>
+          <textarea class="replyTextArea"></textarea>
+          <button>reply</button>
+        </section>
+      </section>
+
+      <!-- next comment -->
+      <section class="container">
+        <section class="comment--section">
+          <!-- vote container -->
+          <div class="replymobile">
+            <div class="vote--container">
+              <img src="./images/icon-plus.svg" alt="icon-plus" />
+              <span>12</span>
+              <img src="./images/icon-minus.svg" alt="icon-minus" />
+            </div>
+
+            <!-- mobile reply -->
+            <div class="reply mobile--reply">
+              <img src="./images/icon-reply.svg" alt="icon-reply" />
+              <span>reply</span>
+            </div>
+          </div>
+
+          <!-- content container -->
+          <div class="content-main">
+            <div class="details-tab">
+              <div class="userinfo--sect">
+                <img
+                  src="./images/avatars/image-amyrobson.png"
+                  alt="image-amyrobson"
+                />
+                <p class="name">amyrobson</p>
+                <p class="time">1 month ago</p>
+              </div>
+
+              <div class="reply desktop--reply">
+                <img src="./images/icon-reply.svg" alt="icon-reply" />
+                <span>reply</span>
+              </div>
+            </div>
+
+            <div class="content">
+              Impressive! Though it seems the drag feature could be improved.
+              But overall it looks incredible. You've nailed the design and the
+              responsiveness at various breakpoints works really well.
+            </div>
+          </div>
+        </section>
+
+        <!--Todo: reply section -->
+        <!-- <section class="replyBoxSection">
+          <div class="info">
+            <img
+              src="./images/avatars/image-amyrobson.png"
+              alt="image-amyrobson"
+            />
+            <button>reply</button>
+          </div>
+          <textarea class="replyTextArea"></textarea>
+          <button>reply</button>
+        </section> -->
+
+        <section class="replies">
+          <div class="border"></div>
+
+          <div class="replied--container">
+            <section class="comment--section">
+              <!-- vote container -->
+              <div class="replymobile">
+                <div class="vote--container">
+                  <img src="./images/icon-plus.svg" alt="icon-plus" />
+                  <span>12</span>
+                  <img src="./images/icon-minus.svg" alt="icon-minus" />
+                </div>
+
+                <!-- mobile reply -->
+                <div class="reply mobile--reply">
+                  <img src="./images/icon-reply.svg" alt="icon-reply" />
+                  <span>reply</span>
+                </div>
+              </div>
+
+              <!-- content container -->
+              <div class="content-main">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
+                    <img
+                      src="./images/avatars/image-amyrobson.png"
+                      alt="image-amyrobson"
+                    />
+                    <p class="name">amyrobson</p>
+                    <p class="time">1 month ago</p>
+                  </div>
+
+                  <div class="reply desktop--reply">
+                    <img src="./images/icon-reply.svg" alt="icon-reply" />
+                    <span>reply</span>
+                  </div>
+                </div>
+
+                <div class="content">
+                  <span>@maxblagun</span> Impressive! Though it seems the drag
+                  feature could be improved. But overall it looks incredible.
+                  You've nailed the design and the responsiveness at various
+                  breakpoints works really well.
+                </div>
+              </div>
+            </section>
+
+            <!-- Todo: reply section -->
+            <!-- <section class="replyBoxSection">
+              <div class="info">
+                <img
+                  src="./images/avatars/image-amyrobson.png"
+                  alt="image-amyrobson"
+                />
+                <button>reply</button>
+              </div>
+              <textarea class="replyTextArea"></textarea>
+              <button>reply</button>
+            </section> -->
+
+            <!-- Todo: second reply -->
+            <section class="comment--section replied--comment">
+              <!-- vote container -->
+              <div class="replymobile">
+                <div class="vote--container">
+                  <img src="./images/icon-plus.svg" alt="icon-plus" />
+                  <span>12</span>
+                  <img src="./images/icon-minus.svg" alt="icon-minus" />
+                </div>
+
+                <!-- mobile reply -->
+                <div class="reply mobile--reply">
+                  <img src="./images/icon-reply.svg" alt="icon-reply" />
+                  <span>reply</span>
+                </div>
+              </div>
+
+              <!-- content container -->
+              <div class="content-main">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
+                    <img
+                      src="./images/avatars/image-amyrobson.png"
+                      alt="image-amyrobson"
+                    />
+                    <p class="name">amyrobson</p>
+                    <p class="user">you</p>
+                    <p class="time">1 month ago</p>
+                  </div>
+
+                  <div class="reply desktop--reply">
+                    <img src="./images/icon-reply.svg" alt="icon-reply" />
+                    <span>reply</span>
+                  </div>
+                </div>
+
+                <div class="content">
+                  <span>@maxblagun</span> Impressive! Though it seems the drag
+                  feature could be improved. But overall it looks incredible.
+                  You've nailed the design and the responsiveness at various
+                  breakpoints works really well.
+                </div>
+              </div>
+            </section>
+
+            <!-- Todo: reply section -->
+            <!-- <section class="replyBoxSection">
+              <div class="info">
+                <img
+                  src="./images/avatars/image-amyrobson.png"
+                  alt="image-amyrobson"
+                />
+                <button>reply</button>
+              </div>
+              <textarea class="replyTextArea"></textarea>
+              <button>reply</button>
+            </section> -->
+
+            <!-- Todo: update comment section -->
+            <section class="comment--section replied--comment">
+              <!-- vote container -->
+              <div class="replymobile">
+                <div class="vote--container">
+                  <img src="./images/icon-plus.svg" alt="icon-plus" />
+                  <span>12</span>
+                  <img src="./images/icon-minus.svg" alt="icon-minus" />
+                </div>
+
+                <!-- mobile reply -->
+                <div class="updatereply mobile--reply">
+                  <div class="del">
+                    <img src="./images/icon-delete.svg" alt="icon-delete" />
+                    <span>delete</span>
+                  </div>
+
+                  <div class="edit">
+                    <img src="./images/icon-edit.svg" alt="icon-edit" />
+                    <span>edit</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- content container -->
+              <div class="content-main update">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
+                    <img
+                      src="./images/avatars/image-amyrobson.png"
+                      alt="image-amyrobson"
+                    />
+                    <p class="name">amyrobson</p>
+                    <p class="user">you</p>
+                    <p class="time">1 month ago</p>
+                  </div>
+
+                  <div class="updatereply desktop--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
+                    </div>
+
+                    <div class="edit">
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
+                    </div>
+                  </div>
+                </div>
+
+                <textarea class="updateComment"></textarea>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+
+      <!-- Todo: userComment -->
+      <section class="user--comment--section">
+        <div class="image--section">
+          <img
+            src="./images/avatars/image-amyrobson.png"
+            alt="image-amyrobson"
+          />
+          <button>send</button>
+        </div>
+        <textarea class="commentTextArea"></textarea>
+        <button>send</button>
+      </section>
+    </main>
 
     <footer>
       <!-- <div class="attribution">
