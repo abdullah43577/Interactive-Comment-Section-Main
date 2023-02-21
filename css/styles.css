@@ -44,14 +44,15 @@ section {
   padding: 5px;
   cursor: pointer;
 }
-.container > .vote--container > span {
+.container > .vote--container > figure > img:hover {
+  fill: hsl(238deg, 40%, 52%);
+}
+
+span {
   padding: 3px 0;
   color: hsl(238deg, 40%, 52%);
   font-weight: 500;
   font-size: 14px;
-}
-.container > .vote--container > figure > img:hover {
-  fill: hsl(238deg, 40%, 52%);
 }
 
 .content--container {
@@ -195,10 +196,6 @@ section {
   opacity: 0.5;
 }
 
-.hidden {
-  display: none;
-}
-
 @media (max-width: 690px) {
   main {
     max-width: 550px;
@@ -211,8 +208,70 @@ section {
   main {
     max-width: 480px;
   }
+  .container {
+    flex-direction: column-reverse;
+    position: relative;
+  }
+  .container > .vote--container {
+    padding: 2px 4px;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .container > .vote--container > :last-child {
+    padding-bottom: 5px;
+  }
+  .container > .vote--container .reply,
+  .container > .vote--container .deledit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    color: hsl(238deg, 40%, 52%);
+    font-weight: 500;
+    margin-right: 10px;
+  }
+  .container > .vote--container .reply figure,
+  .container > .vote--container .deledit figure {
+    margin-right: 5px;
+  }
+  .container .details > .reply,
+  .container .details > .deledit {
+    display: none;
+  }
   .replied {
     max-width: 380px;
+  }
+}
+.hidden {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  main {
+    max-width: 400px;
+  }
+}
+@media (max-width: 400px) {
+  main {
+    max-width: 350px;
+  }
+  .replied {
+    max-width: 350px;
+  }
+}
+@media (max-width: 360px) {
+  main {
+    max-width: 310px;
+  }
+  .replied {
+    max-width: 310px;
+  }
+}
+@media (min-width: 570px) {
+  .vote--container > .reply,
+  .vote--container .deledit {
+    display: none;
   }
 }
 

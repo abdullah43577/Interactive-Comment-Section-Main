@@ -48,17 +48,17 @@ section {
     padding: 5px;
     cursor: pointer;
 
-    > span {
-      padding: 3px 0;
-      color: $moderateBlue;
-      font-weight: 500;
-      font-size: 14px;
-    }
-
     > figure > img:hover {
       fill: $moderateBlue;
     }
   }
+}
+
+span {
+  padding: 3px 0;
+  color: $moderateBlue;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .content--container {
@@ -233,10 +233,6 @@ section {
   }
 }
 
-.hidden {
-  display: none;
-}
-
 @media (max-width: 690px) {
   main {
     max-width: 550px;
@@ -252,7 +248,82 @@ section {
     max-width: 480px;
   }
 
+  .container {
+    flex-direction: column-reverse;
+    position: relative;
+
+    > .vote--container {
+      padding: 2px 4px;
+      flex-direction: row;
+      gap: 0.5rem;
+
+      & > :last-child {
+        padding-bottom: 5px;
+      }
+
+      .reply,
+      .deledit {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: 0;
+        color: $moderateBlue;
+        font-weight: 500;
+        margin-right: 10px;
+
+        figure {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .details > .reply,
+    .details > .deledit {
+      display: none;
+    }
+  }
+
   .replied {
     max-width: 380px;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  main {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 400px) {
+  main {
+    max-width: 350px;
+  }
+
+  .replied {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 360px) {
+  main {
+    max-width: 310px;
+  }
+
+  .replied {
+    max-width: 310px;
+  }
+}
+
+@media (min-width: 570px) {
+  .vote--container {
+    > .reply,
+    .deledit {
+      display: none;
+    }
   }
 }
