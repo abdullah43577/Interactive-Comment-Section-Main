@@ -1,21 +1,20 @@
-"use strict";
-
 import data from "./data.json" assert { type: "json" };
 console.log(data);
 
-console.log(data.comments[0].user.image.png);
+// console.log(data.comments[0].user.image.png);
+("Nayoola52#");
 
 class App {
   constructor() {
     this.main = document.querySelector("main");
 
-    this.main.addEventListener("click", this.domTraversePlus);
-    this.main.addEventListener("click", this.domTraverseMinus);
-    this.main.addEventListener("click", this.domTraverseReplyBtn);
-    this.main.addEventListener("click", this.domTraverseDeleteEl);
-    this.main.addEventListener("click", this.domTraverseEdit);
-    this.main.addEventListener("click", this.domTraverseComment);
-    this.main.addEventListener("click", this.domTraverseReplyBox);
+    this.main.addEventListener("click", this.domTraversePlus.bind(this));
+    this.main.addEventListener("click", this.domTraverseMinus.bind(this));
+    this.main.addEventListener("click", this.domTraverseReplyBtn.bind(this));
+    this.main.addEventListener("click", this.domTraverseDeleteEl.bind(this));
+    this.main.addEventListener("click", this.domTraverseEdit.bind(this));
+    this.main.addEventListener("click", this.domTraverseComment.bind(this));
+    this.main.addEventListener("click", this.domTraverseReplyBox.bind(this));
     this.renderDomEl();
   }
 
@@ -220,6 +219,7 @@ class App {
                       alt="${data.comments[1].replies[1].user.username}"
                     />
                     <p class="name">${data.comments[1].replies[1].user.username}</p>
+                    <p class="you">you</p>
                     <p>${data.comments[1].replies[1].createdAt}</p>
                   </div>
                   <div class="deledit">
@@ -234,7 +234,7 @@ class App {
                       <figure>
                         <img src="./images/icon-edit.svg" alt="icon-edit" />
                       </figure>
-                      <p>Reply</p>
+                      <p>Edit</p>
                     </div>
                   </div>
                 </div>
@@ -253,8 +253,8 @@ class App {
         <div class="comment--section">
           <figure>
             <img
-              src="./images/avatars/image-juliusomo.png"
-              alt="image-juliusomo"
+              src="${data.currentUser.image.png}"
+              alt="${data.currentUser.username}"
             />
           </figure>
 
@@ -287,6 +287,26 @@ class App {
     let replybtn = e.target.closest(".reply");
     if (!replybtn) return;
     console.log(replybtn);
+    let parent = replybtn.parentElement.parentElement.parentElement;
+    console.log(parent);
+
+    parent.insertAdjacentHTML("afterend", this.replyBox());
+  }
+
+  replyBox() {
+    // prettier-ignore
+    return `<div class="reply--section">
+          <figure>
+            <img
+              src="./images/avatars/image-juliusomo.png"
+              alt="image-juliusomo"
+            />
+          </figure>
+
+          <textarea name="textarea-input" id="textarea"></textarea>
+
+          <button>reply</button>
+        </div>`;
   }
 
   domTraverseDeleteEl(e) {

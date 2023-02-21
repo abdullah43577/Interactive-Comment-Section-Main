@@ -85,6 +85,14 @@ span {
   font-size: 14px;
 }
 
+.you {
+  padding: 3px 5px;
+  background-color: hsl(238deg, 40%, 52%);
+  color: hsl(0deg, 0%, 100%);
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
 .content {
   font-size: 15px;
   line-height: 22px;
