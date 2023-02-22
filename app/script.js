@@ -8,6 +8,9 @@ class App {
   constructor() {
     this.main = document.querySelector("main");
     this.userComment;
+    this.plusClicked = false;
+    this.minusClicked = false;
+    this.replyActive = false;
 
     this.main.addEventListener("click", this.domTraversePlus.bind(this));
     this.main.addEventListener("click", this.domTraverseMinus.bind(this));
@@ -17,48 +20,44 @@ class App {
     this.main.addEventListener("click", this.domTraverseComment.bind(this));
     this.main.addEventListener("click", this.domTraverseReplyBox.bind(this));
     this.main.addEventListener("click", this.addComment.bind(this));
+    // this.main.addEventListener("click", this.replyMsg.bind(this));
     this.renderDomEl();
   }
 
   renderDomEl() {
     // prettier-ignore
-    let html = `<section id="section1">
-        <div class="container">
-          <div class="vote--container">
-            <figure>
+    let html = `  <section class="container">
+        <section class="comment--section">
+          <!-- vote container -->
+          <div class="replymobile">
+            <div class="vote--container">
               <img src="./images/icon-plus.svg" alt="icon-plus" />
-            </figure>
-
-            <span>12</span>
-
-            <figure>
+              <span>12</span>
               <img src="./images/icon-minus.svg" alt="icon-minus" />
-            </figure>
+            </div>
 
-            <!-- mobile reply btn -->
-            <div class="reply">
-              <figure>
-                <img src="./images/icon-reply.svg" alt="icon-reply" />
-              </figure>
-              <p>Reply</p>
+            <!-- mobile reply -->
+            <div class="reply mobile--reply">
+              <img src="./images/icon-reply.svg" alt="icon-reply" />
+              <span>reply</span>
             </div>
           </div>
 
-          <div class="content--container">
-            <div class="details">
-              <div class="image--section">
+          <!-- content container -->
+          <div class="content-main">
+            <div class="details-tab">
+              <div class="userinfo--sect">
                 <img
                   src="${data.comments[0].user.image.png}"
-                  alt="image-amyrobson"
+                  alt="${data.comments[0].user.username}"
                 />
                 <p class="name">${data.comments[0].user.username}</p>
-                <p>${data.comments[0].createdAt}</p>
+                <p class="time">${data.comments[0].createdAt}</p>
               </div>
-              <div class="reply">
-                <figure>
-                  <img src="./images/icon-reply.svg" alt="icon-reply" />
-                </figure>
-                <p>Reply</p>
+
+              <div class="reply desktop--reply">
+                <img src="./images/icon-reply.svg" alt="icon-reply" />
+                <span>reply</span>
               </div>
             </div>
 
@@ -66,208 +65,268 @@ class App {
               ${data.comments[0].content}
             </div>
           </div>
-        </div>
+        </section>
 
-
-        <!-- reply box section -->
-        <div class="reply--section hidden">
-          <figure>
+        <!-- reply section -->
+        <section class="replyBoxSection hidden">
+          <div class="info">
             <img
-              src="./images/avatars/image-juliusomo.png"
-              alt="image-juliusomo"
+              src="${data.currentUser.image.png}"
+              alt="${data.currentUser.username}"
             />
-          </figure>
-
-          <textarea name="textarea-input" id="textarea"></textarea>
-
+            <button>reply</button>
+          </div>
+          <textarea class="replyTextArea"></textarea>
           <button>reply</button>
-        </div>
+        </section>
       </section>
 
-      <!-- * section 2 -->
-      <section id="section2">
-        <div class="container">
-          <div class="vote--container">
-            <figure>
+      <!-- next comment -->
+      <section class="container">
+        <section class="comment--section">
+          <!-- vote container -->
+          <div class="replymobile">
+            <div class="vote--container">
               <img src="./images/icon-plus.svg" alt="icon-plus" />
-            </figure>
-
-            <span>12</span>
-
-            <figure>
+              <span>12</span>
               <img src="./images/icon-minus.svg" alt="icon-minus" />
-            </figure>
+            </div>
 
-            <!-- mobile reply btn -->
-            <div class="reply">
-              <figure>
-                <img src="./images/icon-reply.svg" alt="icon-reply" />
-              </figure>
-              <p>Reply</p>
+            <!-- mobile reply -->
+            <div class="reply mobile--reply">
+              <img src="./images/icon-reply.svg" alt="icon-reply" />
+              <span>reply</span>
             </div>
           </div>
 
-          <div class="content--container">
-            <div class="details">
-              <div class="image--section">
+          <!-- content container -->
+          <div class="content-main">
+            <div class="details-tab">
+              <div class="userinfo--sect">
                 <img
                   src="${data.comments[1].user.image.png}"
                   alt="${data.comments[1].user.username}"
                 />
                 <p class="name">${data.comments[1].user.username}</p>
-                <p>${data.comments[1].createdAt}</p>
+                <p class="time">${data.comments[1].createdAt}</p>
               </div>
-              <div class="reply">
-                <figure>
-                  <img src="./images/icon-reply.svg" alt="icon-reply" />
-                </figure>
-                <p>Reply</p>
+
+              <div class="reply desktop--reply">
+                <img src="./images/icon-reply.svg" alt="icon-reply" />
+                <span>reply</span>
               </div>
             </div>
 
             <div class="content">
-              ${data.comments[0].content}
+              ${data.comments[1].content}
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- replies section -->
-        <div class="replies--container">
-          <div class="border--left"></div>
-          <div class="replies">
-            <!-- first reply -->
-            <div class="container replied">
-              <div class="vote--container">
-                <figure>
+        <!--Todo: reply section -->
+        <!-- <section class="replyBoxSection">
+          <div class="info">
+            <img
+              src="${data.currentUser.image}"
+              alt="${data.currentUser.username}"
+            />
+            <button>reply</button>
+          </div>
+          <textarea class="replyTextArea"></textarea>
+          <button>reply</button>
+        </section> -->
+
+        <section class="replies">
+          <div class="border"></div>
+
+          <div class="replied--container">
+            <section class="comment--section">
+              <!-- vote container -->
+              <div class="replymobile">
+                <div class="vote--container">
                   <img src="./images/icon-plus.svg" alt="icon-plus" />
-                </figure>
-
-                <span>12</span>
-
-                <figure>
+                  <span>12</span>
                   <img src="./images/icon-minus.svg" alt="icon-minus" />
-                </figure>
+                </div>
 
-                <!-- mobile reply btn -->
-                <div class="reply">
-                  <figure>
-                    <img src="./images/icon-reply.svg" alt="icon-reply" />
-                  </figure>
-                  <p>Reply</p>
+                <!-- mobile reply -->
+                <div class="reply mobile--reply">
+                  <img src="./images/icon-reply.svg" alt="icon-reply" />
+                  <span>reply</span>
                 </div>
               </div>
 
-              <div class="content--container">
-                <div class="details">
-                  <div class="image--section">
+              <!-- content container -->
+              <div class="content-main">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
                     <img
                       src="${data.comments[1].replies[0].user.image.png}"
                       alt="${data.comments[1].replies[0].user.username}"
                     />
                     <p class="name">${data.comments[1].replies[0].user.username}</p>
-                    <p>${data.comments[1].replies[0].createdAt}</p>
+                    <p class="time">${data.comments[1].replies[0].createdAt}</p>
                   </div>
-                  <div class="reply">
-                    <figure>
-                      <img src="./images/icon-reply.svg" alt="icon-reply" />
-                    </figure>
-                    <p>Reply</p>
+
+                  <div class="reply desktop--reply">
+                    <img src="./images/icon-reply.svg" alt="icon-reply" />
+                    <span>reply</span>
                   </div>
                 </div>
 
                 <div class="content">
-                <span>@${data.comments[1].replies[0].replyingTo}</span>
-                  ${data.comments[1].replies[0].content}
+                  <span>@maxblagun</span> ${data.comments[1].replies[0].content}
                 </div>
               </div>
-            </div>
+            </section>
 
-            <!-- second reply -->
-            <div class="container replied">
-              <div class="vote--container">
-                <figure>
+            <!-- Todo: reply section -->
+            <!-- <section class="replyBoxSection">
+              <div class="info">
+                <img
+                  src="${data.currentUser.image.png}"
+                  alt="${data.currentUser.username}"
+                />
+                <button>reply</button>
+              </div>
+              <textarea class="replyTextArea"></textarea>
+              <button>reply</button>
+            </section> -->
+
+            <!-- Todo: second reply -->
+            <section class="comment--section replied--comment">
+              <!-- vote container -->
+              <div class="replymobile">
+                <div class="vote--container">
                   <img src="./images/icon-plus.svg" alt="icon-plus" />
-                </figure>
-
-                <span>12</span>
-
-                <figure>
+                  <span>12</span>
                   <img src="./images/icon-minus.svg" alt="icon-minus" />
-                </figure>
-
-                <!-- mobile reply btn section -->
-                <div class="deledit">
-                  <div class="delete">
-                    <figure>
-                      <img src="./images/icon-delete.svg" alt="icon-delete" />
-                    </figure>
-                    <p>Delete</p>
-                  </div>
-
-                  <div class="edit">
-                    <figure>
-                      <img src="./images/icon-edit.svg" alt="icon-edit" />
-                    </figure>
-                    <p>Reply</p>
-                  </div>
                 </div>
+
+                <!-- mobile reply -->
+                <div class="updatereply mobile--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
+                    </div>
+
+                    <div class="edit">
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
+                    </div>
+                  </div>
               </div>
 
-              <div class="content--container">
-                <div class="details">
-                  <div class="image--section">
+              <!-- content container -->
+              <div class="content-main">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
                     <img
                       src="${data.comments[1].replies[1].user.image.png}"
                       alt="${data.comments[1].replies[1].user.username}"
                     />
                     <p class="name">${data.comments[1].replies[1].user.username}</p>
-                    <p class="you">you</p>
-                    <p>${data.comments[1].replies[1].createdAt}</p>
+                    <p class="user">you</p>
+                    <p class="time">${data.comments[1].replies[1].createdAt}</p>
                   </div>
-                  <div class="deledit">
-                    <div class="delete">
-                      <figure>
-                        <img src="./images/icon-delete.svg" alt="icon-delete" />
-                      </figure>
-                      <p>Delete</p>
+
+                  <div class="updatereply desktop--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
                     </div>
 
                     <div class="edit">
-                      <figure>
-                        <img src="./images/icon-edit.svg" alt="icon-edit" />
-                      </figure>
-                      <p>Edit</p>
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="content">
-                <span>@${data.comments[1].replies[1].replyingTo}</span>
-                   ${data.comments[1].replies[1].content}
+                  <span>@maxblagun</span> ${data.comments[1].replies[1].content}
                 </div>
               </div>
-            </div>
+            </section>
+
+            <!-- Todo: reply section -->
+            <!-- <section class="replyBoxSection">
+              <div class="info">
+                <img
+                  src="${data.currentUser.image.png}"
+                  alt="${data.currentUser.username}"
+                />
+                <button>reply</button>
+              </div>
+              <textarea class="replyTextArea"></textarea>
+              <button>reply</button>
+            </section> -->
+
+            <!-- Todo: update comment section -->
+            <!--- <section class="comment--section replied--comment">
+              <div class="replymobile">
+                <div class="vote--container">
+                  <img src="./images/icon-plus.svg" alt="icon-plus" />
+                  <span>12</span>
+                  <img src="./images/icon-minus.svg" alt="icon-minus" />
+                </div>
+
+                <div class="updatereply mobile--reply">
+                  <div class="del">
+                    <img src="./images/icon-delete.svg" alt="icon-delete" />
+                    <span>delete</span>
+                  </div>
+
+                  <div class="edit">
+                    <img src="./images/icon-edit.svg" alt="icon-edit" />
+                    <span>edit</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="content-main update">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
+                    <img
+                      src="${data.currentUser.image.png}"
+                      alt="${data.currentUser.username}"
+                    />
+                    <p class="name">${data.currentUser.username}</p>
+                    <p class="user">you</p>
+                    <p class="time">${data.comments[1].replies[1].createdAt}</p>
+                  </div>
+
+                  <div class="updatereply desktop--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
+                    </div>
+
+                    <div class="edit">
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
+                    </div>
+                  </div>
+                </div>
+
+                <textarea class="updateComment"></textarea>
+              </div>
+            </section> --->
           </div>
-        </div>
+        </section>
       </section>
 
-      <section id="section3">
-        <div class="comment--section">
-          <figure>
-            <img
-              src="${data.currentUser.image.png}"
-              alt="${data.currentUser.username}"
-            />
-          </figure>
-
-          <textarea
-            name="textarea-input"
-            id="textarea"
-            placeholder="Add a comment..."
-          ></textarea>
-
-          <button class="send">SEND</button>
+      <!-- Todo: userComment -->
+      <section class="user--comment--section">
+        <div class="image--section">
+          <img
+            src="${data.currentUser.image.png}"
+            alt="${data.currentUser.username}"
+          />
+          <button>send</button>
         </div>
+        <textarea class="commentTextArea"></textarea>
+        <button class="send">send</button>
       </section>`;
 
     this.main.insertAdjacentHTML("beforeend", html);
@@ -276,12 +335,10 @@ class App {
   addComment(e) {
     let sendBtn = e.target.closest(".send");
     if (!sendBtn) return;
+    console.log(sendBtn);
     let comment = sendBtn.previousElementSibling;
     this.userComment = comment.value;
-    // this.main.insertAdjacentHTML(
-    //   "beforeend",
-    //   this.renderComment(this.userComment)
-    // );
+
     // create a range and insert the HTML string as a fragment
     let range = document.createRange();
     let fragment = range.createContextualFragment(
@@ -296,111 +353,195 @@ class App {
 
   renderComment(value) {
     // prettier-ignore
-    return `   <div class="container">
-              <div class="vote--container">
-                <figure>
+    return `<section class="comment--section replied--comment">
+              <!-- vote container -->
+              <div class="replymobile">
+                <div class="vote--container">
                   <img src="./images/icon-plus.svg" alt="icon-plus" />
-                </figure>
-
-                <span>12</span>
-
-                <figure>
+                  <span>12</span>
                   <img src="./images/icon-minus.svg" alt="icon-minus" />
-                </figure>
-
-                <!-- mobile reply btn section -->
-                <div class="deledit">
-                  <div class="delete">
-                    <figure>
-                      <img src="./images/icon-delete.svg" alt="icon-delete" />
-                    </figure>
-                    <p>Delete</p>
-                  </div>
-
-                  <div class="edit">
-                    <figure>
-                      <img src="./images/icon-edit.svg" alt="icon-edit" />
-                    </figure>
-                    <p>Reply</p>
-                  </div>
                 </div>
-              </div>
 
-              <div class="content--container">
-                <div class="details">
-                  <div class="image--section">
-                    <img
-                      src="${data.currentUser.image.png}"
-                      alt="${data.currentUser.username}"
-                    />
-                    <p class="name">${data.currentUser.username}</p>
-                    <p class="you">you</p>
-                    <p>${data.comments[1].replies[1].createdAt}</p>
-                  </div>
-                  <div class="deledit">
-                    <div class="delete">
-                      <figure>
-                        <img src="./images/icon-delete.svg" alt="icon-delete" />
-                      </figure>
-                      <p>Delete</p>
+                <!-- mobile reply -->
+                <div class="updatereply mobile--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
                     </div>
 
                     <div class="edit">
-                      <figure>
-                        <img src="./images/icon-edit.svg" alt="icon-edit" />
-                      </figure>
-                      <p>Edit</p>
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
+                    </div>
+                  </div>
+              </div>
+
+              <!-- content container -->
+              <div class="content-main">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
+                    <img
+                      src="${data.comments[1].replies[1].user.image.png}"
+                      alt="${data.comments[1].replies[1].user.username}"
+                    />
+                    <p class="name">${data.comments[1].replies[1].user.username}</p>
+                    <p class="user">you</p>
+                    <p class="time">${data.comments[1].replies[1].createdAt}</p>
+                  </div>
+
+                  <div class="updatereply desktop--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
+                    </div>
+
+                    <div class="edit">
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="content">
-                <span>@johanssbro</span>
-                   ${value}
+                  ${value}
                 </div>
               </div>
-            </div>`;
+            </section>`;
   }
 
   domTraversePlus(e) {
-    let plus = e.target.closest(".vote--container > :first-child");
+    let plus = e.target.closest("img[src='./images/icon-plus.svg']");
     if (!plus) return;
     console.log(plus);
+    let sibling = plus.nextElementSibling;
+
+    //converting value to number and adding one when clicked
+    if (!this.plusClicked) {
+      let spanTextContent = +sibling.textContent + 1;
+      sibling.textContent = spanTextContent;
+      this.plusClicked = true;
+    }
+
+    this.minusClicked = false;
   }
 
   domTraverseMinus(e) {
-    let minus = e.target.closest(".vote--container > :nth-child(3)");
+    let minus = e.target.closest("img[src='./images/icon-minus.svg']");
     if (!minus) return;
     console.log(minus);
+
+    let sibling = minus.previousElementSibling;
+    //converting value to number and adding one when clicked
+    if (!this.minusClicked) {
+      let spanTextContent = +sibling.textContent - 1;
+      sibling.textContent = spanTextContent;
+      this.minusClicked = true;
+    }
+
+    this.plusClicked = false;
   }
 
   domTraverseReplyBtn(e) {
     let replybtn = e.target.closest(".reply");
     if (!replybtn) return;
-    console.log(replybtn);
-    let parent = replybtn.parentElement.parentElement.parentElement;
 
-    parent.insertAdjacentHTML("afterend", this.replyBox());
+    let parent = replybtn.parentElement.parentElement.parentElement;
+    let parentParent = parent.parentElement;
+
+    if (!this.replyActive) {
+      parentParent.insertBefore(this.replyBox(), parent.nextSibling);
+      this.replyActive = true;
+    }
   }
 
   replyBox() {
     // prettier-ignore
-    return `<div class="reply--section">
-          <figure>
-            <img
-              src="./images/avatars/image-juliusomo.png"
-              alt="image-juliusomo"
-            />
-          </figure>
+    // converting this to a node element
+    const range = document.createRange();
+    const fragment = range.createContextualFragment(`
+    <section class="replyBoxSection">
+      <div class="info">
+        <img
+          src="${data.currentUser.image.png}"
+          alt="${data.currentUser.username}"
+        />
+        <button>reply</button>
+      </div>
+      <textarea class="replyTextArea"></textarea>
+      <button class="replymsg">reply</button>
+    </section>
+  `);
+    return fragment;
+  }
 
-          <textarea name="textarea-input" id="textarea"></textarea>
+  // replyMsg(e) {
+  //   let btn = e.target.closest(".replymsg");
+  //   console.log(btn);
+  //   if (!btn) return;
+  //   let sibling = btn.previousElementSibling;
+  //   console.log(sibling);
+  // }
 
-          <button>reply</button>
-        </div>`;
+  renderReply() {
+    // prettier-ignore
+    return `<section class="comment--section replied--comment">
+              <!-- vote container -->
+              <div class="replymobile">
+                <div class="vote--container">
+                  <img src="./images/icon-plus.svg" alt="icon-plus" />
+                  <span>12</span>
+                  <img src="./images/icon-minus.svg" alt="icon-minus" />
+                </div>
+
+                <!-- mobile reply -->
+                <div class="updatereply mobile--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
+                    </div>
+
+                    <div class="edit">
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
+                    </div>
+                  </div>
+              </div>
+
+              <!-- content container -->
+              <div class="content-main">
+                <div class="details-tab">
+                  <div class="userinfo--sect">
+                    <img
+                      src="${data.comments[1].replies[1].user.image.png}"
+                      alt="${data.comments[1].replies[1].user.username}"
+                    />
+                    <p class="name">${data.comments[1].replies[1].user.username}</p>
+                    <p class="user">you</p>
+                    <p class="time">${data.comments[1].replies[1].createdAt}</p>
+                  </div>
+
+                  <div class="updatereply desktop--reply">
+                    <div class="del">
+                      <img src="./images/icon-delete.svg" alt="icon-delete" />
+                      <span>delete</span>
+                    </div>
+
+                    <div class="edit">
+                      <img src="./images/icon-edit.svg" alt="icon-edit" />
+                      <span>edit</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="content">
+                  <span>@maxblagun</span> ${data.comments[1].replies[1].content}
+                </div>
+              </div>
+            </section>`;
   }
 
   domTraverseDeleteEl(e) {
-    let deleteEl = e.target.closest(".delete");
+    let deleteEl = e.target.closest(".del");
     if (!deleteEl) return;
     console.log(deleteEl);
   }

@@ -9,6 +9,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 body {
@@ -17,11 +18,12 @@ body {
   font-family: "Rubik", sans-serif;
   background-color: hsl(223deg, 19%, 93%);
   font-size: 14px;
+  position: relative;
 }
 
 main {
   width: 700px;
-  margin: 20px 0;
+  margin: 50px 0;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -281,6 +283,12 @@ section.replies > .border {
     width: 350px;
   }
 }
+footer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
 section.hidden {
   display: none;
 }
