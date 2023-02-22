@@ -579,21 +579,36 @@ class App {
 
     let content =
       edit.parentElement.parentElement.parentElement.lastElementChild;
+    console.log(content.parentNode);
 
-    let textContent = content.textContent;
+    let textContent = content.textContent.trim();
 
-    // replace the element at the location with the textarea element
-    const range = document.createRange();
-    const fragment = range.createContextualFragment(
-      `<div><textarea class="updateComment"></textarea><button class="submitComment">UPDATE</button></div>`
+    // create a range and insert the HTML string as a fragment
+    let range = document.createRange();
+    let fragment = range.createContextualFragment(
+      `<div class="updateCmmt">
+                <textarea class="updateComment"></textarea>
+                <button class="update">UPDATE</button>
+              </div>`
     );
-    let newContent = fragment.querySelector(".updateComment");
-    let submitButton = fragment.querySelector(".submitComment");
 
-    newContent.value = textContent.trim();
+    // replace the element with the textarea element and submit button
+    content.parentNode.replaceChild(fragment, content);
+    document.querySelector(".updateComment").value = textContent;
 
-    this.parentEl = content.parentNode;
-    this.parentEl.replaceChild(fragment, content);
+    this.update(content, fragment);
+  }
+
+  update(content, fragment) {
+    let btn = document.querySelector(".update");
+    let textarea = document.querySelector(".updateComment");
+    btn.addEventListener("click", function () {
+      console.log("this");
+      content.textContent = textarea.value;
+      console.log(edit);
+      // replace the element with the textarea element and submit button
+      content.parentNode.replaceChild(content, fragment);
+    });
   }
 
   // domTraverseComment(e) {
