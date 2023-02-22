@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
-.updatereply, .user--comment--section, section.replies, .reply, .details-tab > .userinfo--sect, .details-tab, .content-main, .vote--container, .comment--section, body {
+.updatereply, .user--comment--section, section.replies,
+.replied--containerupdate, .reply, .details-tab > .userinfo--sect, .details-tab, .content-main, .vote--container, .comment--section, body {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,12 +155,14 @@ button:hover {
   display: none;
 }
 
-section.replies {
+section.replies,
+.replied--containerupdate {
   align-items: stretch;
   margin-top: 10px;
   justify-content: space-between;
 }
-section.replies > .border {
+section.replies > .border,
+.replied--containerupdate > .border {
   width: 1px;
   border: 1px solid hsl(211deg, 10%, 45%);
   min-height: 100%;
@@ -214,6 +217,10 @@ section.replies > .border {
 .updatereply .edit:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+.replied--containerupdate .content {
+  width: 555px;
 }
 
 @media (max-width: 500px) {

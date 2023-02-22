@@ -10,17 +10,19 @@ class App {
     this.userComment;
     this.plusClicked = false;
     this.minusClicked = false;
+    // todo: will change this later to toggle
     this.replyActive = false;
+    this.parentEl;
 
     this.main.addEventListener("click", this.domTraversePlus.bind(this));
     this.main.addEventListener("click", this.domTraverseMinus.bind(this));
     this.main.addEventListener("click", this.domTraverseReplyBtn.bind(this));
     this.main.addEventListener("click", this.domTraverseDeleteEl.bind(this));
     this.main.addEventListener("click", this.domTraverseEdit.bind(this));
-    this.main.addEventListener("click", this.domTraverseComment.bind(this));
-    this.main.addEventListener("click", this.domTraverseReplyBox.bind(this));
+    // this.main.addEventListener("click", this.domTraverseComment.bind(this));
+    // this.main.addEventListener("click", this.domTraverseReplyBox.bind(this));
     this.main.addEventListener("click", this.addComment.bind(this));
-    // this.main.addEventListener("click", this.replyMsg.bind(this));
+    this.main.addEventListener("click", this.domTraverseReplyMsg.bind(this));
     this.renderDomEl();
   }
 
@@ -444,6 +446,7 @@ class App {
   domTraverseReplyBtn(e) {
     let replybtn = e.target.closest(".reply");
     if (!replybtn) return;
+    console.log(replybtn);
 
     let parent = replybtn.parentElement.parentElement.parentElement;
     let parentParent = parent.parentElement;
@@ -474,22 +477,43 @@ class App {
     return fragment;
   }
 
-  // replyMsg(e) {
-  //   let btn = e.target.closest(".replymsg");
-  //   console.log(btn);
-  //   if (!btn) return;
-  //   let sibling = btn.previousElementSibling;
-  //   console.log(sibling);
-  // }
+  domTraverseReplyMsg(e) {
+    let btnreply = e.target.closest(".replymsg");
+    console.log(btnreply);
+    if (!btnreply) return;
+    let sibling = btnreply.previousElementSibling;
+    console.log(sibling);
 
-  renderReply() {
+    if (!sibling.value) return;
+    let textContent = sibling.value;
+    console.log(textContent);
+
+    let parent = document.querySelector(".replyBoxSection").parentElement;
+
+    let siblingEl = parent.firstElementChild;
+
+    parent.insertBefore(this.renderReply(textContent), siblingEl.nextSibling);
+
+    console.log(parent);
+
+    document.querySelector(".replyBoxSection").remove();
+
+    // todo: check to see why this doesn't work later on
+    this.replyActive = true;
+  }
+
+  renderReply(value) {
     // prettier-ignore
-    return `<section class="comment--section replied--comment">
+    const range = document.createRange()
+    const fragment = range.createContextualFragment(`
+      <div class="replied--containerupdate">
+      <div class="border"></div>
+      <section class="comment--section replied--comment">
               <!-- vote container -->
               <div class="replymobile">
                 <div class="vote--container">
                   <img src="./images/icon-plus.svg" alt="icon-plus" />
-                  <span>12</span>
+                  <span>0</span>
                   <img src="./images/icon-minus.svg" alt="icon-minus" />
                 </div>
 
@@ -534,10 +558,12 @@ class App {
                 </div>
 
                 <div class="content">
-                  <span>@maxblagun</span> ${data.comments[1].replies[1].content}
+                  <span>@maxblagun</span> ${value}
                 </div>
               </div>
-            </section>`;
+            </section>
+            </div>`);
+    return fragment;
   }
 
   domTraverseDeleteEl(e) {
@@ -550,21 +576,37 @@ class App {
     let edit = e.target.closest(".edit");
     if (!edit) return;
     console.log(edit);
+
+    let content =
+      edit.parentElement.parentElement.parentElement.lastElementChild;
+
+    let textContent = content.textContent;
+
+    // replace the element at the location with the textarea element
+    const range = document.createRange();
+    const fragment = range.createContextualFragment(
+      `<div><textarea class="updateComment"></textarea><button class="submitComment">UPDATE</button></div>`
+    );
+    let newContent = fragment.querySelector(".updateComment");
+    let submitButton = fragment.querySelector(".submitComment");
+
+    newContent.value = textContent.trim();
+
+    this.parentEl = content.parentNode;
+    this.parentEl.replaceChild(fragment, content);
   }
 
-  domTraverseComment(e) {
-    let comment = e.target.closest("#section3 > textarea");
-    if (!comment) return;
-    console.log(comment);
-  }
+  // domTraverseComment(e) {
+  //   let comment = e.target.closest("#section3 > textarea");
+  //   if (!comment) return;
+  //   console.log(comment);
+  // }
 
-  domTraverseReplyBox(e) {
-    let replyBox = e.target.closest(".reply--section > textarea");
-    if (!replyBox) return;
-    console.log(replyBox);
-  }
+  // domTraverseReplyBox(e) {
+  //   let replyBox = e.target.closest(".reply--section > textarea");
+  //   if (!replyBox) return;
+  //   console.log(replyBox);
+  // }
 }
 
 const app = new App();
-
-// Todo1: when a user clicks on reply, append the reply box section to the element

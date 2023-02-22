@@ -173,7 +173,8 @@ button {
   display: none;
 }
 
-section.replies {
+section.replies,
+.replied--containerupdate {
   @extend %style-shared;
   align-items: stretch;
   margin-top: 10px;
@@ -241,6 +242,10 @@ section.replies {
     opacity: 0.5;
     cursor: pointer;
   }
+}
+
+.replied--containerupdate .content {
+  width: 555px;
 }
 
 @media (max-width: 500px) {
