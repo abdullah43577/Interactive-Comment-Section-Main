@@ -1,11 +1,16 @@
 import data from "./data.json" assert { type: "json" };
-console.log(data);
 
-// console.log(data.comments[0].user.image.png);
-("Nayoola52#");
+class MyComponent {
+  constructor() {
+    this.parent = null;
+    this.textContent = null;
+    // initialize other properties
+  }
+}
 
 class App {
   constructor() {
+    this.component = new MyComponent();
     this.main = document.querySelector("main");
     this.userComment;
     this.plusClicked = false;
@@ -13,14 +18,20 @@ class App {
     // todo: will change this later to toggle
     this.replyActive = false;
     this.parentEl;
+    this.popup = document.querySelector(".popup");
+    this.overlay = document.querySelector(".overlay");
+    this.cancel = document.querySelector(".cancelbtn");
+    this.delete = document.querySelector(".delbtn");
+
+    this.cancel.addEventListener("click", this.closePopup.bind(this));
+    this.overlay.addEventListener("click", this.closePopup.bind(this));
+    this.delete.addEventListener("click", this.deletePopup.bind(this));
 
     this.main.addEventListener("click", this.domTraversePlus.bind(this));
     this.main.addEventListener("click", this.domTraverseMinus.bind(this));
     this.main.addEventListener("click", this.domTraverseReplyBtn.bind(this));
     this.main.addEventListener("click", this.domTraverseDeleteEl.bind(this));
     this.main.addEventListener("click", this.domTraverseEdit.bind(this));
-    // this.main.addEventListener("click", this.domTraverseComment.bind(this));
-    // this.main.addEventListener("click", this.domTraverseReplyBox.bind(this));
     this.main.addEventListener("click", this.addComment.bind(this));
     this.main.addEventListener("click", this.domTraverseReplyMsg.bind(this));
     this.renderDomEl();
@@ -337,7 +348,7 @@ class App {
   addComment(e) {
     let sendBtn = e.target.closest(".send");
     if (!sendBtn) return;
-    console.log(sendBtn);
+
     let comment = sendBtn.previousElementSibling;
     this.userComment = comment.value;
 
@@ -414,7 +425,7 @@ class App {
   domTraversePlus(e) {
     let plus = e.target.closest("img[src='./images/icon-plus.svg']");
     if (!plus) return;
-    console.log(plus);
+
     let sibling = plus.nextElementSibling;
 
     //converting value to number and adding one when clicked
@@ -430,7 +441,6 @@ class App {
   domTraverseMinus(e) {
     let minus = e.target.closest("img[src='./images/icon-minus.svg']");
     if (!minus) return;
-    console.log(minus);
 
     let sibling = minus.previousElementSibling;
     //converting value to number and adding one when clicked
@@ -446,9 +456,12 @@ class App {
   domTraverseReplyBtn(e) {
     let replybtn = e.target.closest(".reply");
     if (!replybtn) return;
-    console.log(replybtn);
 
     let parent = replybtn.parentElement.parentElement.parentElement;
+
+    this.username =
+      replybtn.parentElement.firstElementChild.firstElementChild.nextElementSibling;
+
     let parentParent = parent.parentElement;
 
     if (!this.replyActive) {
@@ -479,30 +492,33 @@ class App {
 
   domTraverseReplyMsg(e) {
     let btnreply = e.target.closest(".replymsg");
-    console.log(btnreply);
     if (!btnreply) return;
+
     let sibling = btnreply.previousElementSibling;
-    console.log(sibling);
 
     if (!sibling.value) return;
+
+    // accessing the username properties
+    let username =
+      btnreply.parentElement.previousElementSibling.lastElementChild
+        .firstElementChild.firstElementChild.firstElementChild
+        .nextElementSibling;
+
     let textContent = sibling.value;
-    console.log(textContent);
 
     let parent = document.querySelector(".replyBoxSection").parentElement;
-
     let siblingEl = parent.firstElementChild;
-
-    parent.insertBefore(this.renderReply(textContent), siblingEl.nextSibling);
-
-    console.log(parent);
-
+    parent.insertBefore(
+      this.renderReply(textContent, username),
+      siblingEl.nextSibling
+    );
     document.querySelector(".replyBoxSection").remove();
 
     // todo: check to see why this doesn't work later on
     this.replyActive = true;
   }
 
-  renderReply(value) {
+  renderReply(value, span) {
     // prettier-ignore
     const range = document.createRange()
     const fragment = range.createContextualFragment(`
@@ -558,7 +574,7 @@ class App {
                 </div>
 
                 <div class="content">
-                  <span>@maxblagun</span> ${value}
+                  <span>${span.textContent}</span> ${value}
                 </div>
               </div>
             </section>
@@ -569,59 +585,91 @@ class App {
   domTraverseDeleteEl(e) {
     let deleteEl = e.target.closest(".del");
     if (!deleteEl) return;
-    console.log(deleteEl);
+
+    this.parent =
+      deleteEl.parentElement.parentElement.parentElement.parentElement;
+
+    this.overlay.classList.remove("hidden");
+    this.popup.classList.remove("hidden");
+  }
+
+  closePopup() {
+    this.overlay.classList.add("hidden");
+    this.popup.classList.add("hidden");
+  }
+
+  deletePopup() {
+    if (this.parent) this.parent.remove();
+    this.overlay.classList.add("hidden");
+    this.popup.classList.add("hidden");
   }
 
   domTraverseEdit(e) {
     let edit = e.target.closest(".edit");
     if (!edit) return;
-    console.log(edit);
 
     let content =
       edit.parentElement.parentElement.parentElement.lastElementChild;
-    console.log(content.parentNode);
 
-    let textContent = content.textContent.trim();
+    let nodes = content.childNodes;
 
-    // create a range and insert the HTML string as a fragment
-    let range = document.createRange();
-    let fragment = range.createContextualFragment(
-      `<div class="updateCmmt">
-                <textarea class="updateComment"></textarea>
-                <button class="update">UPDATE</button>
-              </div>`
-    );
+    this.textContent = "";
 
-    // replace the element with the textarea element and submit button
-    content.parentNode.replaceChild(fragment, content);
-    document.querySelector(".updateComment").value = textContent;
+    // looping through to remove the @keyword of the reply reference
+    nodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        this.textContent += node.textContent.trim();
+      }
+    });
 
-    this.update(content, fragment);
+    // create a new element
+    let updateDiv = document.createElement("div");
+    updateDiv.classList.add("updateCmmt");
+
+    let textarea = document.createElement("textarea");
+    textarea.classList.add("updateComment");
+    textarea.value = this.textContent.trim();
+
+    let btn = document.createElement("button");
+    btn.classList.add("update");
+    btn.textContent = "UPDATE";
+
+    // append the child elements to the new element
+    updateDiv.appendChild(textarea);
+    updateDiv.appendChild(btn);
+
+    // replace the existing element with the new one
+    content.replaceWith(updateDiv);
+
+    // todo: haven't gotten the logic for the username aspect yet, might change this later
+    // accessing the username properties
+    let username =
+      edit.parentElement.previousElementSibling.firstElementChild
+        .nextElementSibling;
+
+    this.update(updateDiv);
   }
 
-  update(content, fragment) {
+  update(updateDiv) {
     let btn = document.querySelector(".update");
     let textarea = document.querySelector(".updateComment");
+    let username = this.username;
+
     btn.addEventListener("click", function () {
-      console.log("this");
-      content.textContent = textarea.value;
-      console.log(edit);
-      // replace the element with the textarea element and submit button
-      content.parentNode.replaceChild(content, fragment);
+      let newDiv = document.createElement("div");
+      newDiv.classList.add("content");
+
+      let newSpan = document.createElement("span");
+      if (username) newSpan.textContent = `@${username.textContent}`;
+
+      let commentTexts = document.createTextNode(textarea.value);
+
+      newDiv.appendChild(newSpan);
+      newDiv.appendChild(commentTexts);
+
+      updateDiv.replaceWith(newDiv);
     });
   }
-
-  // domTraverseComment(e) {
-  //   let comment = e.target.closest("#section3 > textarea");
-  //   if (!comment) return;
-  //   console.log(comment);
-  // }
-
-  // domTraverseReplyBox(e) {
-  //   let replyBox = e.target.closest(".reply--section > textarea");
-  //   if (!replyBox) return;
-  //   console.log(replyBox);
-  // }
 }
 
 const app = new App();

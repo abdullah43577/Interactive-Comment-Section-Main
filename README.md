@@ -44,12 +44,12 @@ Your users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](<./screenshots/Screenshot%20(124).png>)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution URL here](https://www.frontendmentor.io/solutions/interactive-comment-section-built-using-vanilla-js-and-scss-gw6ScK_tUQ)
+- Live Site URL: [Live site URL here](https://interactive-comment-sect.netlify.app/)
 
 ## My process
 
@@ -59,24 +59,12 @@ Your users should be able to:
 - CSS custom properties
 - Flexbox
 - CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+- Desktop-first workflow
+- Vanilla Javascript
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
+This project was a little tough, but at the end became pretty easy
 
 ```js
 const proudOfThisFunc = () => {
@@ -86,12 +74,23 @@ const proudOfThisFunc = () => {
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+I need to keep getting better at developing myself into become a better programmer, I've also started to implement OOP in my recent projects. I really hope I get better at it, because I'm lovign it already.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Resource](https://chat.openai.com/) - This AI is really God sent, this project would have been a lot tougher for me without this kind of AI, It helped me figure out some errors in my code and provided some coding snippets in some cases. And a good example of the some of the coding snippets it provided that helped me in this project is
+
+```js
+// create a range and insert the HTML string as a fragment
+let range = document.createRange();
+let fragment = range.createContextualFragment(
+  this.renderComment(this.userComment)
+);
+```
+
+```All of the code snippets where I used the code just as the above was because I was passing an argument to a function that probably required a node element of a pure string, so doing that fixed the problem.
+
+```
 
 ## Author
 

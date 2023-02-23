@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
-.updatereply, .user--comment--section, section.replies,
+.popup > .btns, .popup, .updatereply, .user--comment--section, section.replies,
 .replied--containerupdate, .reply, .details-tab > .userinfo--sect, .details-tab, .content-main, .vote--container, .comment--section, body {
   display: flex;
   align-items: center;
@@ -19,6 +19,7 @@ body {
   font-family: "Rubik", sans-serif;
   background-color: hsl(223deg, 19%, 93%);
   font-size: 14px;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -223,6 +224,53 @@ section.replies > .border,
   width: 555px;
 }
 
+.popup {
+  background-color: hsl(0deg, 0%, 100%);
+  padding: 15px;
+  max-width: 300px;
+  gap: 1rem;
+  flex-direction: column;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  align-items: inherit;
+}
+.popup > h2 {
+  font-size: 18px;
+  color: hsl(211deg, 10%, 45%);
+  font-weight: 700;
+  text-align: left;
+}
+.popup > p {
+  color: hsl(211deg, 10%, 45%);
+  font-size: 14px;
+  text-align: left;
+}
+.popup > .btns {
+  gap: 1rem;
+}
+.popup > .btns > .cancelbtn {
+  background-color: hsl(211deg, 10%, 45%);
+}
+.popup > .btns > .delbtn {
+  background-color: hsl(358deg, 79%, 66%);
+}
+
+.overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+  z-index: 5000;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 500px) {
   main {
     max-width: 400px;
@@ -297,6 +345,10 @@ footer {
 }
 
 section.hidden {
+  display: none;
+}
+
+div.hidden {
   display: none;
 }
 
