@@ -78,7 +78,7 @@ I need to keep getting better at developing myself into become a better programm
 
 ### Useful resources
 
-- [Resource](https://chat.openai.com/) - This AI is really God sent, this project would have been a lot tougher for me without this kind of AI, It helped me figure out some errors in my code and provided some coding snippets in some cases. And a good example of the some of the coding snippets it provided that helped me in this project is
+- [chatGPT](https://chat.openai.com/) - This AI is really God sent, this project would have been a lot tougher for me without this kind of AI, It helped me figure out some errors in my code and provided some coding snippets in some cases. And a good example of the some of the coding snippets it provided that helped me in this project is
 
 ```js
 // create a range and insert the HTML string as a fragment
@@ -88,7 +88,8 @@ let fragment = range.createContextualFragment(
 );
 ```
 
-```All of the code snippets where I used the code just as the above was because I was passing an argument to a function that probably required a node element of a pure string, so doing that fixed the problem.
+```
+All of the code snippets where I used the code just as the above was because I was passing an argument to a function that probably required a node element of a pure string, so doing that fixed the problem.
 
 ```
 
