@@ -67,9 +67,16 @@ Your users should be able to:
 This project was a little tough, but at the end became pretty easy
 
 ```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
+  closePopup() {
+    this.overlay.classList.add("hidden");
+    this.popup.classList.add("hidden");
+  }
+
+  deletePopup() {
+    if (this.parent) this.parent.remove();
+    this.overlay.classList.add("hidden");
+    this.popup.classList.add("hidden");
+  };
 ```
 
 ### Continued development
